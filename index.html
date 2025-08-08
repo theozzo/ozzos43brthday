@@ -4,49 +4,54 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Invitación Cumpleaños</title>
-<style>
-  body {
-    background: url('fondo.png') no-repeat center center fixed;
-    background-size: cover;
-    font-family: sans-serif;
-    text-align: center;
-    color: #111;
-    padding: 2rem;
-  }
+  <style>
+    body {
+      background: url('fondo.png') repeat;
+      font-family: sans-serif;
+      text-align: center;
+      color: #111;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
 
-  body::before {
-    content: "";
-    background-color: rgba(255, 255, 255, 0.7);
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: -1;
-  }
+    body::before {
+      content: "";
+      background-color: rgba(255, 255, 255, 0.7);
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
 
-  img {
-    max-width: 400px;
-    width: 100%;
-    height: auto;
-    margin: 20px 0;
-  }
+    img {
+      max-width: 400px;
+      width: 100%;
+      height: auto;
+      margin: 20px 0;
+    }
 
-  a {
-    display: inline-block;
-    margin: 1rem;
-    text-decoration: none;
-    color: #1a0dab;
-    font-weight: bold;
-  }
-</style>
+    h1 {
+      font-size: 2rem;
+    }
 
+    a {
+      display: inline-block;
+      margin: 1rem;
+      text-decoration: none;
+      color: #1a0dab;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <img src="confirma.png" alt="Confirmación">
-  <h1>¡Estás invitado a mi cumpleaños!</h1>
-  <p>📍 Dirección: Av. Ejemplo 123, Ciudad</p>
+  <h1>Confirma tu asistencia</h1>
+  <p>📍 Dirección: C. Fray Juan de Moya 170, Santo Domingo, León, Gto.</p>
   <p>🗓️ Fecha: 15 de Septiembre 2025 - 8:00 PM</p>
-  <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Fiesta+Cumpleaños+Ozzo&dates=20250915T200000Z/20250916T020000Z&details=Fiesta+en+Av.+Ejemplo+123&location=Av.+Ejemplo+123,+Ciudad" target="_blank">Agéndalo en tu calendario</a>
-  <a href="https://www.google.com/maps?q=Av.+Ejemplo+123,+Ciudad" target="_blank">Cómo llegar (Google Maps)</a>
+  <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Fiesta+Cumpleaños+Ozzo&dates=20250915T200000Z/20250916T020000Z&details=Fiesta+en+C.+Fray+Juan+de+Moya+170&location=C.+Fray+Juan+de+Moya+170,+León" target="_blank">Agéndalo en tu calendario</a>
+  <a href="https://www.google.com/maps/place/C.+Fray+Juan+de+Moya+170/data=!4m7!3m6!1s0x842bbfc97e83012b:0xf020532109081949!8m2!3d21.0910633!4d-101.6671955!16s%2Fg%2F11qnbp5gvl!19sChIJKwGDfsm_K4QRSRkICSFTIPA?entry=tts" target="_blank">Cómo llegar (Google Maps)</a>
+  <a href="https://maps.apple.com/?ll=21.09105369586434,-101.66718259644891&q=Fiesta" target="_blank">Cómo llegar (Apple Maps)</a>
   <img src="msj.png" alt="Mensaje">
 </body>
 </html>
