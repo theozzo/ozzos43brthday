@@ -13,7 +13,7 @@
       padding: 2rem;
       position: relative;
       z-index: 1;
-      font-size: 38%; /* reducción acumulada */
+      font-size: 38%; /* 40% menos que original */
     }
 
     body::before {
@@ -30,17 +30,9 @@
       font-weight: bold;
     }
 
-    img {
-      max-width: 480px;
-      width: 100%;
-      height: auto;
-      margin: 20px auto;
-      display: block;
-    }
-
     input[type="text"] {
-      padding: 0.6rem;
-      font-size: 1.4rem;
+      padding: 0.8rem;
+      font-size: 1.6rem;
       width: 70%;
       max-width: 300px;
       margin: 1rem auto;
@@ -53,15 +45,23 @@
       background-color: #1a0dab;
       color: white;
       border: none;
-      padding: 0.6rem 1.2rem;
+      padding: 0.8rem 1.4rem;
       border-radius: 8px;
       font-weight: bold;
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       cursor: pointer;
     }
 
     button:hover {
       background-color: #0f0080;
+    }
+
+    img {
+      max-width: 480px;
+      width: 100%;
+      height: auto;
+      margin: 20px auto;
+      display: block;
     }
   </style>
 </head>
@@ -69,12 +69,12 @@
   <h1>Ingresa tu número de teléfono</h1>
   <input type="text" id="telefono" placeholder="Ej. 4771234567" />
   <button onclick="validarNumero()">Entrar</button>
-  <img src="singin.png" alt="Acceso"/>
+  <img src="singin.png" alt="Acceso" />
 
   <script>
     async function sha256(texto) {
       const encoder = new TextEncoder();
-      const data = encoder.encode(texto);
+      const data = encoder.encode(texto.trim());
       const hashBuffer = await crypto.subtle.digest('SHA-256', data);
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
@@ -85,23 +85,23 @@
       const hash = await sha256(numero);
 
       const hashesValidos = [
-        "f831282d8d3c34e739d8be1a89137778564d1584082a13ac316474457e9b1606",
-        "d03ffba0459dbb44145b251f9f2bb5f3c97c690c59de6d41d2180f22c5fc06a1",
-        "6fd8044eab9a3f57cf4ff70f65df7a9dd1bff10dd80dcb6cd167473755865d6b",
-        "9cfcb59bff4dce2dfb95f9433a90c9c3b3f22f6fd1b4fe8cc8b73fffb5f5b5c9",
-        "0596a56e8c91e918e252028267bd98d6aa0ef1b361ac1b24b135f6d64f038d27",
-        "34a50bfc8c4a846405d82e260ebcaec3728d4265d95dcdb96bfe73e213d43a6b",
-        "2b81a7939c2a6b10d3e51778961b114eb78e524a0d4c155ea6a6a66079c7b90a",
-        "de3b72fa23a9b470ac16bd91c55340b1d660589f4181ebc1586cc4f7e7f17c12",
-        "f31b4e254b6598e89e6815d69cbbbf3a1960c56e61a6c7df26e8cbeab317f071",
-        "8f5fdd1f2036abf99846a55efde647650ce45cf22c6fc582c6e4a23e6b9d6ff9",
-        "e3e4bfaee8ac32e68904ad3c51c8f1051b42c83a3df75f5b88aa49b415b7deef",
-        "e1d347a4558c235cc7cf9eb6dcebd3d01164bc6b857fbb3e0cbf4bc9a28cfd70",
-        "2d54c3cfb77844eb07c04ec7f9b7ec7f4f402e5c9b0c0c26bd5c21bff419af95",
-        "193ed9bfae609f3b91e315ce260b1192b49e7fa6e98cf62b03844c65d46b44d7",
-        "b9c6eae58fbd2ef8a1d5c6e63dc9fdfd2de22c195e9bff872c0ef6a7d9bb5d8a",
-        "650dbe98a3d11a97c3e4a1aeecb245189b407c40c0ec764ac7b176199e3e5cf0",
-        "92ee61f1c373aadfbc35f594f3851815f681f3c8b7b241d4911086816931b028"
+        "f831282d8d3c34e739d8be1a89137778564d1584082a13ac316474457e9b1606", // 4775815482
+        "d03ffba0459dbb44145b251f9f2bb5f3c97c690c59de6d41d2180f22c5fc06a1", // 4772753817
+        "6fd8044eab9a3f57cf4ff70f65df7a9dd1bff10dd80dcb6cd167473755865d6b", // 4771797700
+        "9cfcb59bff4dce2dfb95f9433a90c9c3b3f22f6fd1b4fe8cc8b73fffb5f5b5c9", // 4772299984
+        "0596a56e8c91e918e252028267bd98d6aa0ef1b361ac1b24b135f6d64f038d27", // 4772752213
+        "34a50bfc8c4a846405d82e260ebcaec3728d4265d95dcdb96bfe73e213d43a6b", // 4791441609
+        "2b81a7939c2a6b10d3e51778961b114eb78e524a0d4c155ea6a6a66079c7b90a", // 4772547368
+        "de3b72fa23a9b470ac16bd91c55340b1d660589f4181ebc1586cc4f7e7f17c12", // 4771114040
+        "f31b4e254b6598e89e6815d69cbbbf3a1960c56e61a6c7df26e8cbeab317f071", // 4777873484
+        "8f5fdd1f2036abf99846a55efde647650ce45cf22c6fc582c6e4a23e6b9d6ff9", // 4623046806
+        "e3e4bfaee8ac32e68904ad3c51c8f1051b42c83a3df75f5b88aa49b415b7deef", // 4776485619
+        "e1d347a4558c235cc7cf9eb6dcebd3d01164bc6b857fbb3e0cbf4bc9a28cfd70", // 4791416994
+        "2d54c3cfb77844eb07c04ec7f9b7ec7f4f402e5c9b0c0c26bd5c21bff419af95", // 4771311170
+        "193ed9bfae609f3b91e315ce260b1192b49e7fa6e98cf62b03844c65d46b44d7", // 4771165491
+        "b9c6eae58fbd2ef8a1d5c6e63dc9fdfd2de22c195e9bff872c0ef6a7d9bb5d8a", // 4771516475
+        "650dbe98a3d11a97c3e4a1aeecb245189b407c40c0ec764ac7b176199e3e5cf0", // 4773288878
+        "92ee61f1c373aadfbc35f594f3851815f681f3c8b7b241d4911086816931b028"  // 4777878859
       ];
 
       if (hashesValidos.includes(hash)) {
