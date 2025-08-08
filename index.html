@@ -2,113 +2,114 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Acceso al evento</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grill and Pool Party - Acceso</title>
   <style>
-    body {
-      background: url('fondo.png') repeat;
-      font-family: sans-serif;
-      text-align: center;
-      color: #111;
-      padding: 2rem;
-      position: relative;
-      z-index: 1;
-      font-size: 60%;
+    body{
+      background:url('fondo.png') repeat;
+      font-family:sans-serif;
+      text-align:center;
+      color:#111;
+      padding:2rem;
+      position:relative;
+      z-index:1;
+      font-size:60%; /* -40% en pantalla de acceso */
     }
-
-    body::before {
-      content: "";
-      background-color: rgba(255, 255, 255, 0.5);
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
+    body::before{
+      content:"";
+      background-color:rgba(255,255,255,0.5);
+      position:fixed; inset:0; z-index:-1;
     }
-
-    img {
-      max-width: 480px;
-      width: 100%;
-      height: auto;
-      margin: 20px auto;
-      display: block;
+    img{max-width:480px;width:100%;height:auto;margin:20px auto;display:block;}
+    h1{font-size:2.2rem;font-weight:800;margin:0.5rem 0 1rem}
+    p{font-size:1.1rem}
+    .btn{
+      display:inline-block;margin:0.5rem; padding:0.6rem 1.2rem;
+      background:#1a0dab;color:#fff;border:0;border-radius:8px;
+      font-weight:700;font-size:1rem;text-decoration:none;cursor:pointer;
     }
-
-    h1 {
-      font-size: 3rem;
-      font-weight: bold;
+    .btn:hover{background:#0f0080}
+    input{
+      padding:0.6rem 0.8rem;font-size:1.1rem;border:1px solid #ccc;border-radius:8px;
+      width:280px;max-width:90%;text-align:center;
     }
-
-    input[type="text"] {
-      padding: 1rem;
-      font-size: 1.4rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      width: 300px;
-      max-width: 90%;
-      text-align: center;
-    }
-
-    button {
-      background-color: #1a0dab;
-      color: white;
-      border: none;
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background-color: #0f0080;
-    }
+    /* Contenido real (se ve tras validar) */
+    #contenido{display:none; font-size:64%;}
+    .botones a{display:block;margin:1rem auto;width:fit-content}
   </style>
 </head>
 <body>
-  <h1>Ingresa tu número de teléfono</h1>
-  <input type="text" id="telefono" placeholder="Ej. 4771234567" />
-  <button onclick="validarAcceso()">Entrar</button>
 
-  <img src="signin.png" alt="Acceso" />
+  <!-- ACCESO -->
+  <div id="acceso">
+    <h1>Ingresa tu número de teléfono</h1>
+    <input id="tel" type="text" placeholder="Ej. 4771234567">
+    <button class="btn" onclick="validar()">Entrar</button>
+    <img src="singin.png" alt="Acceso">
+  </div>
+
+  <!-- CONTENIDO (oculto hasta validar) -->
+  <div id="contenido">
+    <img src="confirma.png" alt="Confirmación">
+    <img src="msj.png" alt="Mensaje">
+
+    <h1>¡Confirma tu asistencia!</h1>
+    <p>📍 <strong>Dirección: C. Fray Juan de Moya #170, Santo Domingo, León, Gto.</strong></p>
+    <p>📅 <strong>Fecha: 23 de Agosto 2025 – 13:00 a 20:00 Hrs</strong></p>
+
+    <div class="botones">
+      <a class="btn" target="_blank"
+         href="https://www.google.com/calendar/render?action=TEMPLATE&text=Grill+and+Pool+Party&dates=20250823T180000Z/20250824T010000Z&details=Grill+and+Pool+Party+en+C.+Fray+Juan+de+Moya+170,+Santo+Domingo,+León&location=C.+Fray+Juan+de+Moya+170,+León">📅 Agéndalo en tu calendario</a>
+
+      <a class="btn" target="_blank"
+         href="https://www.google.com/maps/place/C.+Fray+Juan+de+Moya+170/data=!4m7!3m6!1s0x842bbfc97e83012b:0xf020532109081949!8m2!3d21.0910633!4d-101.6671955!16s%2Fg%2F11qnbp5gvl!19sChIJKwGDfsm_K4QRSRkICSFTIPA?entry=tts">📍 Google Maps</a>
+
+      <a class="btn" target="_blank"
+         href="https://maps.apple.com/?ll=21.09105369586434,-101.66718259644891&q=Grill+and+Pool+Party">🍎 Apple Maps</a>
+
+      <a class="btn" target="_blank" href="https://wa.me/524775815482">💬 Escribir a Ozzo</a>
+      <a class="btn" href="tel:+524775815482">📞 Llamar a Ozzo</a>
+    </div>
+  </div>
 
   <script>
-    async function sha256(texto) {
-      const encoder = new TextEncoder();
-      const data = encoder.encode(texto);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    // Hashes SHA-256 válidos (de tus teléfonos)
+    const HASHES = [
+      "562715a6980c6f1bde8e8ca5593b20ae43438549319c527dc1e8da95ade725c6",
+      "79f90130282fea451b5406148b77f60b24be1105d3e4dcc27239bdfbd243a55f",
+      "92253e78802d47ebfa34d63c92f91b21907760737b1237042e853439c9988181",
+      "b1fce8750a7db30e5818527ef5529adcc998fc05a67fb479e7adfd21cc44deec",
+      "d1b57dad65ef735fd7c8f5a06e15f34aefe7dce76387869a857fd2d52db7d811",
+      "a1af5d558999888dc6ea3571393ebd558f7ae1c4011d4e6d3c24501b92bed854",
+      "4efd51a411d29d0fa5ba6053cb19efab6404ec5fb69dbc36042260d2b50d4160",
+      "6edf143602eb472ae0cd47252584b3b3e8199c799179bd0bcba6cca4d725a346",
+      "16edbaa1a4cb034eb6dd0ca8545c6cc9f8404f8fe6cba7a64a8716088eeac3d6",
+      "b46b1e2cb1930142509270c61c9f983c036958334c739e0cc117d6ad9cf07155",
+      "27ef360afdb474fa8d116a5f98c5c28f82d147d40825b4305f855835dc12a45d",
+      "dad70d8a8da1c9d6d7310b3434df45fb10b3ac917a3d4aa299145f54c394ee49",
+      "ff6c56738df65c422226c49be0bf6fbe019b9338733baac72c161115afbe97fe",
+      "2a3738dbcc2e80e20ff28bb58783bac2d4b826695b93c0d97e8b773020744fe9",
+      "8d9e6b3601d09d06353bf5a0eb37e61a607dcee373e2cb845793e2a67b0bb220",
+      "e92608ec46e0e8f3e8f8708e69147165eabd5d5904a5b8605693fe42da69d932",
+      "3cab6d12310cd798183f3e1c2d5ae96e6f8473a97a47c9d784ebee23e2933a7e"
+    ];
+
+    async function sha256(txt){
+      const enc = new TextEncoder();
+      const buf = await crypto.subtle.digest('SHA-256', enc.encode(txt));
+      return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
     }
 
-    async function validarAcceso() {
-      const input = document.getElementById("telefono").value.trim();
-      const hash = await sha256(input);
-      const validHashes = [
-        "562715a6980c6f1bde8e8ca5593b20ae43438549319c527dc1e8da95ade725c6",
-        "79f90130282fea451b5406148b77f60b24be1105d3e4dcc27239bdfbd243a55f",
-        "92253e78802d47ebfa34d63c92f91b21907760737b1237042e853439c9988181",
-        "b1fce8750a7db30e5818527ef5529adcc998fc05a67fb479e7adfd21cc44deec",
-        "d1b57dad65ef735fd7c8f5a06e15f34aefe7dce76387869a857fd2d52db7d811",
-        "a1af5d558999888dc6ea3571393ebd558f7ae1c4011d4e6d3c24501b92bed854",
-        "4efd51a411d29d0fa5ba6053cb19efab6404ec5fb69dbc36042260d2b50d4160",
-        "6edf143602eb472ae0cd47252584b3b3e8199c799179bd0bcba6cca4d725a346",
-        "16edbaa1a4cb034eb6dd0ca8545c6cc9f8404f8fe6cba7a64a8716088eeac3d6",
-        "b46b1e2cb1930142509270c61c9f983c036958334c739e0cc117d6ad9cf07155",
-        "27ef360afdb474fa8d116a5f98c5c28f82d147d40825b4305f855835dc12a45d",
-        "dad70d8a8da1c9d6d7310b3434df45fb10b3ac917a3d4aa299145f54c394ee49",
-        "ff6c56738df65c422226c49be0bf6fbe019b9338733baac72c161115afbe97fe",
-        "2a3738dbcc2e80e20ff28bb58783bac2d4b826695b93c0d97e8b773020744fe9",
-        "8d9e6b3601d09d06353bf5a0eb37e61a607dcee373e2cb845793e2a67b0bb220",
-        "e92608ec46e0e8f3e8f8708e69147165eabd5d5904a5b8605693fe42da69d932",
-        "3cab6d12310cd798183f3e1c2d5ae96e6f8473a97a47c9d784ebee23e2933a7e"
-      ];
-
-      if (validHashes.includes(hash)) {
-        window.location.href = "index.html";
-      } else {
-        alert("Número no válido. Intenta de nuevo.");
+    async function validar(){
+      // solo dígitos
+      const limpio = (document.getElementById('tel').value || "").replace(/\D/g,'');
+      if(!limpio){ alert('Ingresa tu número.'); return; }
+      const h = await sha256(limpio);
+      if(HASHES.includes(h)){
+        document.getElementById('acceso').style.display='none';
+        document.getElementById('contenido').style.display='block';
+      }else{
+        alert('Número no válido. Intenta de nuevo.');
       }
     }
   </script>
