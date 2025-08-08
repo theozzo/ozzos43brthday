@@ -145,11 +145,33 @@
   </div>
 
   <script>
-    const clavesValidas = ['1234']; // Aquí agregarás los números reales
+    const hashesValidos = [
+      "562715a6980c6f1bde8e8ca5593b20ae43438549319c527dc1e8da95ade725c6",
+      "79f90130282fea451b5406148b77f60b24be1105d3e4dcc27239bdfbd243a55f",
+      "92253e78802d47ebfa34d63c92f91b21907760737b1237042e853439c9988181",
+      "b1fce8750a7db30e5818527ef5529adcc998fc05a67fb479e7adfd21cc44deec",
+      "d1b57dad65ef735fd7c8f5a06e15f34aefe7dce76387869a857fd2d52db7d811",
+      "a1af5d558999888dc6ea3571393ebd558f7ae1c4011d4e6d3c24501b92bed854",
+      "4efd51a411d29d0fa5ba6053cb19efab6404ec5fb69dbc36042260d2b50d4160",
+      "6edf143602eb472ae0cd47252584b3b3e8199c799179bd0bcba6cca4d725a346",
+      "16edbaa1a4cb034eb6dd0ca8545c6cc9f8404f8fe6cba7a64a8716088eeac3d6",
+      "b46b1e2cb1930142509270c61c9f983c036958334c739e0cc117d6ad9cf07155",
+      "27ef360afdb474fa8d116a5f98c5c28f82d147d40825b4305f855835dc12a45d",
+      "dad70d8a8da1c9d6d7310b3434df45fb10b3ac917a3d4aa299145f54c394ee49",
+      "ff6c56738df65c422226c49be0bf6fbe019b9338733baac72c161115afbe97fe",
+      "2a3738dbcc2e80e20ff28bb58783bac2d4b826695b93c0d97e8b773020744fe9",
+      "8d9e6b3601d09d06353bf5a0eb37e61a607dcee373e2cb845793e2a67b0bb220",
+      "e92608ec46e0e8f3e8f8708e69147165eabd5d5904a5b8605693fe42da69d932",
+      "3cab6d12310cd798183f3e1c2d5ae96e6f8473a97a47c9d784ebee23e2933a7e"
+    ];
 
-    function validar() {
+    async function validar() {
       const valor = document.getElementById('clave').value.trim();
-      if (clavesValidas.includes(valor)) {
+      const msg = new TextEncoder().encode(valor);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msg);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      if (hashesValidos.includes(hashHex)) {
         document.getElementById('acceso').style.display = 'none';
         document.getElementById('contenido').style.display = 'block';
       } else {
