@@ -52,10 +52,19 @@
     <p>📅 <strong>Fecha: 23 de Agosto 2025 – 13:00 a 20:00 Hrs</strong></p>
 
     <div class="botones">
-      <!-- NUEVO BOTÓN PARA MOSTRAR FORMULARIO -->
-      <button class="btn" onclick="document.getElementById('formularioGoogle').style.display='block'">
-        📝 Confirmar asistencia
-      </button>
+<!-- NUEVO BOTÓN PARA MOSTRAR FORMULARIO -->
+    <button class="btn" onclick="mostrarFormulario()">
+      📝 Confirmar asistencia
+    </button>
+    
+    <script>
+      function mostrarFormulario(){
+        const form = document.getElementById('formularioGoogle');
+        form.style.display = 'block';
+        form.scrollIntoView({ behavior: 'smooth' });
+      }
+    </script>
+
 
       <!-- HORARIO CORRECTO: 13:00–20:00 local -> 19:00–02:00 UTC -->
       <a class="btn" target="_blank"
