@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Grill and Pool Party - Ozzo´s 43th Bday</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso a invitación</title>
   <style>
     body {
       background: url('fondo.png') repeat;
       font-family: sans-serif;
       text-align: center;
-      color: #111;
       padding: 2rem;
       position: relative;
       z-index: 1;
@@ -18,11 +17,45 @@
 
     body::before {
       content: "";
-      background-color: rgba(255, 255, 255, 0.70);
+      background-color: rgba(255, 255, 255, 0.5);
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
       z-index: -1;
+    }
+
+    #acceso {
+      margin-top: 2rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    input[type="text"] {
+      padding: 0.5rem;
+      font-size: 1.2rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 250px;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background-color: #1a0dab;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-left: 0.5rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0f0080;
     }
 
     img {
@@ -32,141 +65,45 @@
       margin: 20px auto;
       display: block;
     }
-
-    h1 {
-      font-size: 3rem;
-      font-weight: bold;
-    }
-
-    p {
-      font-size: 1.1rem;
-    }
-
-    strong {
-      font-weight: bold;
-    }
-
-    .botones a {
-      display: block;
-      margin: 1rem auto;
-      padding: 0.5rem 1rem;
-      width: fit-content;
-      text-decoration: none;
-      color: #fff;
-      background-color: #1a0dab;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 0.9rem;
-    }
-
-    .botones a:hover {
-      background-color: #0f0080;
-    }
-
-    #contenido {
-      display: none;
-    }
-
-    #acceso {
-      text-align: center;
-    }
-
-    .img-acceso {
-      max-width: 480px;
-      width: 100%;
-      height: auto;
-      margin: 20px auto;
-      display: block;
-    }
-
-    input {
-      padding: 0.5rem;
-      font-size: 1.1rem;
-      width: 220px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-
-    .boton-acceso {
-      margin-left: 10px;
-      padding: 0.6rem 1.2rem;
-      font-size: 1.1rem;
-      font-weight: bold;
-      background-color: #1a0dab;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .boton-acceso:hover {
-      background-color: #0f0080;
-    }
   </style>
 </head>
 <body>
-
+  <img src="signin.png" alt="Acceso a invitación">
   <div id="acceso">
     <h1>Ingresa tu número de teléfono</h1>
     <input type="text" id="clave" placeholder="Ej. 4771234567">
-    <button class="boton-acceso" onclick="validar()">Entrar</button>
-    <img src="singin.png" alt="Acceso" class="img-acceso">
+    <button onclick="validar()">Entrar</button>
   </div>
 
-  <div id="contenido">
-    <img src="confirma.png" alt="Confirmación">
-    <img src="msj.png" alt="Mensaje visual">
-
-    <h1>¡Confirma tu asistencia!</h1>
-    <p>📍 <strong>Dirección: C. Fray Juan de Moya #170, Santo Domingo, León, Gto.</strong></p>
-    <p>📅 <strong>Fecha: 23 de Agosto 2025 – 13:00 a 20:00 Hrs</strong></p>
-
-    <div class="botones">
-      <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Grill+and+Pool+Party&dates=20250823T180000Z/20250824T010000Z&details=Grill+and+Pool+Party+en+C.+Fray+Juan+de+Moya+170,+Santo+Domingo,+León&location=C.+Fray+Juan+de+Moya+170,+León" target="_blank">
-        📅 Agéndalo en tu calendario
-      </a>
-
-      <a href="https://www.google.com/maps/place/C.+Fray+Juan+de+Moya+170/data=!4m7!3m6!1s0x842bbfc97e83012b:0xf020532109081949!8m2!3d21.0910633!4d-101.6671955!16s%2Fg%2F11qnbp5gvl!19sChIJKwGDfsm_K4QRSRkICSFTIPA?entry=tts" target="_blank">
-        📍 Google Maps
-      </a>
-
-      <a href="https://maps.apple.com/?ll=21.09105369586434,-101.66718259644891&q=Grill+and+Pool+Party" target="_blank">
-        🍎 Apple Maps
-      </a>
-
-      <a href="https://wa.me/524775815482" target="_blank">
-        💬 Escribir a Ozzo
-      </a>
-
-      <a href="tel:+524775815482">
-        📞 Llamar a Ozzo
-      </a>
-    </div>
+  <div id="contenido" style="display: none">
+    <!-- Tu contenido principal va aquí -->
+    <h2>¡Bienvenido!</h2>
+    <p>Gracias por confirmar.</p>
   </div>
 
   <script>
     const hashesValidos = [
       "562715a6980c6f1bde8e8ca5593b20ae43438549319c527dc1e8da95ade725c6",
-      "79f90130282fea451b5406148b77f60b24be1105d3e4dcc27239bdfbd243a55f",
-      "92253e78802d47ebfa34d63c92f91b21907760737b1237042e853439c9988181",
-      "b1fce8750a7db30e5818527ef5529adcc998fc05a67fb479e7adfd21cc44deec",
-      "d1b57dad65ef735fd7c8f5a06e15f34aefe7dce76387869a857fd2d52db7d811",
-      "a1af5d558999888dc6ea3571393ebd558f7ae1c4011d4e6d3c24501b92bed854",
-      "4efd51a411d29d0fa5ba6053cb19efab6404ec5fb69dbc36042260d2b50d4160",
-      "6edf143602eb472ae0cd47252584b3b3e8199c799179bd0bcba6cca4d725a346",
-      "16edbaa1a4cb034eb6dd0ca8545c6cc9f8404f8fe6cba7a64a8716088eeac3d6",
-      "b46b1e2cb1930142509270c61c9f983c036958334c739e0cc117d6ad9cf07155",
-      "27ef360afdb474fa8d116a5f98c5c28f82d147d40825b4305f855835dc12a45d",
-      "dad70d8a8da1c9d6d7310b3434df45fb10b3ac917a3d4aa299145f54c394ee49",
-      "ff6c56738df65c422226c49be0bf6fbe019b9338733baac72c161115afbe97fe",
-      "2a3738dbcc2e80e20ff28bb58783bac2d4b826695b93c0d97e8b773020744fe9",
-      "8d9e6b3601d09d06353bf5a0eb37e61a607dcee373e2cb845793e2a67b0bb220",
-      "e92608ec46e0e8f3e8f8708e69147165eabd5d5904a5b8605693fe42da69d932",
-      "3cab6d12310cd798183f3e1c2d5ae96e6f8473a97a47c9d784ebee23e2933a7e"
+      "37f6eac16e235a520e106f7884b7053262c2eb07c1a4a4f0f09eac76b9eb30a2",
+      "39c58e7f4182ae2790644ce117b99a75c7e48ce69d6c6c356e09a97bde525f71",
+      "bd841290417c11dc19510a09ff7638d53f6f21e5b20e31fa214242af6e0640a1",
+      "ce93d203a8dc0b5464ae9fdc26b3fdffb10f80c9b2f17e02df5199981bb3c79b",
+      "c9c22787d00a24eaa1c264c8c3c5024436d8be34a567bb8e5cfb82b96342e1e8",
+      "33a4f2e7e197d630eb9335276e203d682a78c88d5bb5358f76d84ed5d2c77be1",
+      "8e139ae570929070dfc155c054ef46d4b96e83ff13d81c1f6b9f8c312acb76c1",
+      "9723a7e9cb65f71b896409650dc3de8df1232f02d1ae4e0d4df0d85c5c53675a",
+      "2a7380cb2f1a2ecfbb6a6c3f147bca1e3872ebbeed1ef5b44cb3982a2df8e5e6",
+      "1df9d66f7eec63d05c6b9f6b6ecb31556e9a1bcb6a09b1ebc2081cd29ff7e37d",
+      "d317db282a51011fc97a0f1a030ea6c66fef5c6fe0a3540b1db13d6e16789f97",
+      "dd291d6bcd7252cb17b65edbe5f34936a3b7e3fa7770e4539a3f98b8d0840129",
+      "a6b09d7bcd41ae03a7a13e01ccf20b6b6d10f9f63f2e15ec8cc94ae5b5f4d91d",
+      "038f422a40823f7c31915053a85de116946ecfd4ae90b0b8a73f9f7d5a759bfc",
+      "57ae84d99be23284c2f14ec7b1b8e7b6b5d9e875de4d194d6f96edc00852e0df",
+      "e25b8e7f739f7f39a47d9e01771935f4d3c21170c7475d09ff8ffb6fdbe93827"
     ];
 
     async function validar() {
-      const valor = document.getElementById('clave').value.trim();
+      const valor = document.getElementById('clave').value.trim().replace(/\D/g, '');
       const msg = new TextEncoder().encode(valor);
       const hashBuffer = await crypto.subtle.digest('SHA-256', msg);
       const hashArray = Array.from(new Uint8Array(hashBuffer));
@@ -179,6 +116,5 @@
       }
     }
   </script>
-
 </body>
 </html>
