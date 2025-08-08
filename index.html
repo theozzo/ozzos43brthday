@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acceso a invitación</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Acceso - Ozzo's 43th Bday</title>
   <style>
     body {
       background: url('fondo.png') repeat;
       font-family: sans-serif;
       text-align: center;
+      color: #111;
       padding: 2rem;
       position: relative;
       z-index: 1;
-      font-size: 64%;
+      font-size: 38.4%; /* Reducción del 40% adicional sobre 64% */
     }
 
     body::before {
@@ -24,40 +25,6 @@
       z-index: -1;
     }
 
-    #acceso {
-      margin-top: 2rem;
-    }
-
-    h1 {
-      font-size: 3rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-    }
-
-    input[type="text"] {
-      padding: 0.5rem;
-      font-size: 1.2rem;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      width: 250px;
-    }
-
-    button {
-      padding: 0.5rem 1rem;
-      font-size: 1.2rem;
-      font-weight: bold;
-      background-color: #1a0dab;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      margin-left: 0.5rem;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0f0080;
-    }
-
     img {
       max-width: 480px;
       width: 100%;
@@ -65,54 +32,86 @@
       margin: 20px auto;
       display: block;
     }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    input {
+      padding: 0.6rem;
+      font-size: 1.2rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 250px;
+      text-align: center;
+    }
+
+    button {
+      padding: 0.6rem 1.2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      background-color: #1a0dab;
+      border: none;
+      border-radius: 8px;
+      margin-left: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0f0080;
+    }
+
+    .container {
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
-  <img src="signin.png" alt="Acceso a invitación">
-  <div id="acceso">
-    <h1>Ingresa tu número de teléfono</h1>
-    <input type="text" id="clave" placeholder="Ej. 4771234567">
-    <button onclick="validar()">Entrar</button>
+  <h1>Ingresa tu número de teléfono</h1>
+  <div class="container">
+    <input type="text" id="phone" placeholder="Ej. 4771234567" />
+    <button onclick="checkAccess()">Entrar</button>
   </div>
-
-  <div id="contenido" style="display: none">
-    <!-- Tu contenido principal va aquí -->
-    <h2>¡Bienvenido!</h2>
-    <p>Gracias por confirmar.</p>
-  </div>
+  <img src="signin.png" alt="Acceso">
 
   <script>
-    const hashesValidos = [
-      "562715a6980c6f1bde8e8ca5593b20ae43438549319c527dc1e8da95ade725c6",
-      "37f6eac16e235a520e106f7884b7053262c2eb07c1a4a4f0f09eac76b9eb30a2",
-      "39c58e7f4182ae2790644ce117b99a75c7e48ce69d6c6c356e09a97bde525f71",
-      "bd841290417c11dc19510a09ff7638d53f6f21e5b20e31fa214242af6e0640a1",
-      "ce93d203a8dc0b5464ae9fdc26b3fdffb10f80c9b2f17e02df5199981bb3c79b",
-      "c9c22787d00a24eaa1c264c8c3c5024436d8be34a567bb8e5cfb82b96342e1e8",
-      "33a4f2e7e197d630eb9335276e203d682a78c88d5bb5358f76d84ed5d2c77be1",
-      "8e139ae570929070dfc155c054ef46d4b96e83ff13d81c1f6b9f8c312acb76c1",
-      "9723a7e9cb65f71b896409650dc3de8df1232f02d1ae4e0d4df0d85c5c53675a",
-      "2a7380cb2f1a2ecfbb6a6c3f147bca1e3872ebbeed1ef5b44cb3982a2df8e5e6",
-      "1df9d66f7eec63d05c6b9f6b6ecb31556e9a1bcb6a09b1ebc2081cd29ff7e37d",
-      "d317db282a51011fc97a0f1a030ea6c66fef5c6fe0a3540b1db13d6e16789f97",
-      "dd291d6bcd7252cb17b65edbe5f34936a3b7e3fa7770e4539a3f98b8d0840129",
-      "a6b09d7bcd41ae03a7a13e01ccf20b6b6d10f9f63f2e15ec8cc94ae5b5f4d91d",
-      "038f422a40823f7c31915053a85de116946ecfd4ae90b0b8a73f9f7d5a759bfc",
-      "57ae84d99be23284c2f14ec7b1b8e7b6b5d9e875de4d194d6f96edc00852e0df",
-      "e25b8e7f739f7f39a47d9e01771935f4d3c21170c7475d09ff8ffb6fdbe93827"
+    async function sha256(str) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(str);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    const validHashes = [
+      "06c921d7a215ba1c8408e5a9f94c1d21739a0f9a4865aaadf4067e6c05cd49a5",
+      "3e4c79f3f2158f50877deaa473a7dd441f19ddf81a255e216009e34677cd3b8f",
+      "282ae74cf3db1b23d00adf23d4071de32dba0225040f99c70a8dc6107cb0111c",
+      "7300f4787fd2c06ce42d2a3b480e31350a3d4602bd1ffea6eb5d74c6a3d1912a",
+      "a787fc4f08f05d4b6b0cd1a9d5a32a7787f9427d3615b3c97ee22a8f4df92c1a",
+      "96bbff52b80aeab743287ba109fe2f166fc4f7460a48eb87879cb122a243300a",
+      "a740385e89a92e8d5e35b11b8eaa21b98d5b99ab37372b31b0eea33940701660",
+      "f0215288d29c4eb4ab2e1719c0159e45ce848fb108a49489bc83c429f21aa3b5",
+      "f1b00040668b5cde80ef2f5bcb4d8d6c9ac2694e3028fc086d4be92c9b0dbbfd",
+      "31bc7ffddbd8c56f131f5fdaf8e420e6f823a0a6ebef749b5392991d6c1fc21f",
+      "228353c4419865a0f142d893d2c867d3819634fa1103cf3f765b62bcfda004fc",
+      "51a7165938fda8d90e8798c9ce0f99a5e463c3e9c88fef45302b84613072557d",
+      "531b8ff117ab365a4092a911c3e5fc084f3a2e3a0e0dd41cd0b50837474ae04c",
+      "3789ddcae1dc424d430b99f725c48c68df4b57138bbf91a2054388d09f029dec",
+      "7872283f8b100ec8dc2c13b407ac23f7e697222b367c4da63b2cbe50ab64e87f",
+      "77b9d544f73ae7709a9a5bc48cdbb799464083e5a5e6c257b7c8bfe6802c3279",
+      "cf6f02cfd4410f7755ac8bd03a659a4a6c7ec63014a190a5fddf4f7f840b95f1"
     ];
 
-    async function validar() {
-      const valor = document.getElementById('clave').value.trim().replace(/\D/g, '');
-      const msg = new TextEncoder().encode(valor);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msg);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-      if (hashesValidos.includes(hashHex)) {
-        document.getElementById('acceso').style.display = 'none';
-        document.getElementById('contenido').style.display = 'block';
+    async function checkAccess() {
+      const phone = document.getElementById("phone").value.trim();
+      const hashed = await sha256(phone);
+      if (validHashes.includes(hashed)) {
+        window.location.href = "invitacion.html"; // Cambia si tu archivo se llama diferente
       } else {
-        alert('Número no válido. Intenta de nuevo.');
+        alert("Número no válido. Intenta de nuevo.");
       }
     }
   </script>
