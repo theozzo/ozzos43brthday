@@ -28,7 +28,8 @@
     .btn:hover{background:#0f0080}
     input{padding:.6rem .8rem;font-size:1.1rem;border:1px solid #ccc;border-radius:8px;width:280px;max-width:90%;text-align:center;}
     #contenido{display:none;font-size:64%}
-    .botones a{display:block;margin:1rem auto;width:fit-content}
+    #formularioGoogle{display:none;margin-top:1.5rem;}
+    .botones a, .botones button{display:block;margin:1rem auto;width:fit-content}
   </style>
 </head>
 <body>
@@ -51,6 +52,11 @@
     <p>📅 <strong>Fecha: 23 de Agosto 2025 – 13:00 a 20:00 Hrs</strong></p>
 
     <div class="botones">
+      <!-- NUEVO BOTÓN PARA MOSTRAR FORMULARIO -->
+      <button class="btn" onclick="document.getElementById('formularioGoogle').style.display='block'">
+        📝 Confirmar asistencia
+      </button>
+
       <!-- HORARIO CORRECTO: 13:00–20:00 local -> 19:00–02:00 UTC -->
       <a class="btn" target="_blank"
          href="https://www.google.com/calendar/render?action=TEMPLATE&text=Grill+and+Pool+Party&dates=20250823T190000Z/20250824T020000Z&details=Grill+and+Pool+Party+en+C.+Fray+Juan+de+Moya+170,+Santo+Domingo,+León&location=C.+Fray+Juan+de+Moya+170,+León">
@@ -71,16 +77,18 @@
       <a class="btn" href="tel:+524775815482">📞 Llamar a Ozzo</a>
     </div>
 
-    <!-- FORMULARIO GOOGLE FORMS -->
-    <iframe 
-      src="https://docs.google.com/forms/d/e/1FAIpQLSe4a88KhUsjFYGFlUJ9RMkikaqWV232cRdPQBauy-9HzjmX7Q/viewform?embedded=true" 
-      width="100%" 
-      height="800" 
-      frameborder="0" 
-      marginheight="0" 
-      marginwidth="0">
-      Cargando…
-    </iframe>
+    <!-- FORMULARIO GOOGLE FORMS OCULTO -->
+    <div id="formularioGoogle">
+      <iframe 
+        src="https://docs.google.com/forms/d/e/1FAIpQLSe4a88KhUsjFYGFlUJ9RMkikaqWV232cRdPQBauy-9HzjmX7Q/viewform?embedded=true" 
+        width="100%" 
+        height="800" 
+        frameborder="0" 
+        marginheight="0" 
+        marginwidth="0">
+        Cargando…
+      </iframe>
+    </div>
 
   </div>
 
