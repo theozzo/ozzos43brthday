@@ -13,12 +13,12 @@
       padding: 2rem;
       position: relative;
       z-index: 1;
-      font-size: 64%; /* reducción total acumulada: 36% */
+      font-size: 64%;
     }
 
     body::before {
       content: "";
-      background-color: rgba(255, 255, 255, 0.70); /* opacidad más baja */
+      background-color: rgba(255, 255, 255, 0.70);
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
@@ -62,36 +62,89 @@
     .botones a:hover {
       background-color: #0f0080;
     }
+
+    #contenido {
+      display: none;
+    }
+
+    #acceso {
+      margin-top: 100px;
+    }
+
+    input {
+      padding: 0.5rem;
+      font-size: 1rem;
+      width: 200px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-left: 10px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      font-weight: bold;
+      background-color: #1a0dab;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0f0080;
+    }
   </style>
 </head>
 <body>
-  <img src="confirma.png" alt="Confirmación">
-  <img src="msj.png" alt="Mensaje visual">
-
-  <h1>¡Confirma tu asistencia!</h1>
-  <p>📍 <strong>Dirección: C. Fray Juan de Moya #170, Santo Domingo, León, Gto.</strong></p>
-  <p>📅 <strong>Fecha: 23 de Agosto 2025 – 13:00 a 20:00 Hrs</strong></p>
-
-  <div class="botones">
-    <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Grill+and+Pool+Party&dates=20250823T180000Z/20250824T010000Z&details=Grill+and+Pool+Party+en+C.+Fray+Juan+de+Moya+170,+Santo+Domingo,+León&location=C.+Fray+Juan+de+Moya+170,+León" target="_blank">
-      📅 Agéndalo en tu calendario
-    </a>
-
-    <a href="https://www.google.com/maps/place/C.+Fray+Juan+de+Moya+170/data=!4m7!3m6!1s0x842bbfc97e83012b:0xf020532109081949!8m2!3d21.0910633!4d-101.6671955!16s%2Fg%2F11qnbp5gvl!19sChIJKwGDfsm_K4QRSRkICSFTIPA?entry=tts" target="_blank">
-      📍 Google Maps
-    </a>
-
-    <a href="https://maps.apple.com/?ll=21.09105369586434,-101.66718259644891&q=Grill+and+Pool+Party" target="_blank">
-      🍎 Apple Maps
-    </a>
-
-    <a href="https://wa.me/524775815482" target="_blank">
-      💬 Escribir a Ozzo
-    </a>
-
-    <a href="tel:+524775815482">
-      📞 Llamar a Ozzo
-    </a>
+  <div id="acceso">
+    <h1>Ingresa tu número para acceder</h1>
+    <input type="text" id="clave" placeholder="Ej. 1234">
+    <button onclick="validar()">Entrar</button>
   </div>
+
+  <div id="contenido">
+    <img src="confirma.png" alt="Confirmación">
+    <img src="msj.png" alt="Mensaje visual">
+
+    <h1>¡Confirma tu asistencia!</h1>
+    <p>📍 <strong>Dirección: C. Fray Juan de Moya #170, Santo Domingo, León, Gto.</strong></p>
+    <p>📅 <strong>Fecha: 23 de Agosto 2025 – 13:00 a 20:00 Hrs</strong></p>
+
+    <div class="botones">
+      <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Grill+and+Pool+Party&dates=20250823T180000Z/20250824T010000Z&details=Grill+and+Pool+Party+en+C.+Fray+Juan+de+Moya+170,+Santo+Domingo,+León&location=C.+Fray+Juan+de+Moya+170,+León" target="_blank">
+        📅 Agéndalo en tu calendario
+      </a>
+
+      <a href="https://www.google.com/maps/place/C.+Fray+Juan+de+Moya+170/data=!4m7!3m6!1s0x842bbfc97e83012b:0xf020532109081949!8m2!3d21.0910633!4d-101.6671955!16s%2Fg%2F11qnbp5gvl!19sChIJKwGDfsm_K4QRSRkICSFTIPA?entry=tts" target="_blank">
+        📍 Google Maps
+      </a>
+
+      <a href="https://maps.apple.com/?ll=21.09105369586434,-101.66718259644891&q=Grill+and+Pool+Party" target="_blank">
+        🍎 Apple Maps
+      </a>
+
+      <a href="https://wa.me/524775815482" target="_blank">
+        💬 Escribir a Ozzo
+      </a>
+
+      <a href="tel:+524775815482">
+        📞 Llamar a Ozzo
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const clavesValidas = ['1234'];
+    function validar() {
+      const valor = document.getElementById('clave').value.trim();
+      if (clavesValidas.includes(valor)) {
+        document.getElementById('acceso').style.display = 'none';
+        document.getElementById('contenido').style.display = 'block';
+      } else {
+        alert('Número no válido. Intenta de nuevo.');
+      }
+    }
+  </script>
 </body>
 </html>
