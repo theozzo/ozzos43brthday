@@ -29,9 +29,9 @@
     }
     p{font-size:1.1rem}
     .btn{
-      display:inline-block;
-      margin:.5rem;
-      padding:.6rem 1.2rem;
+      display:block;
+      margin:.6rem auto;
+      padding:.8rem 1rem;
       background:#1a0dab;
       color:#fff;
       border:0;
@@ -40,24 +40,26 @@
       font-size:1rem;
       text-decoration:none;
       cursor:pointer;
+      width:100%;
+      max-width:320px; /* mismo ancho */
+      box-sizing:border-box;
     }
     .btn:hover{background:#0f0080}
     #contenido{display:block;font-size:64%}
-    .botones a{display:block;margin:1rem auto;width:fit-content}
+    .botones{margin-top:1rem}
   </style>
 </head>
 <body>
 
   <!-- CONTENIDO DIRECTO -->
   <div id="contenido">
-    <img src="confirma.png" alt="Confirmación">
+    <img src="homepage.png" alt="Home">
     <img src="msj.png" alt="Mensaje">
 
     <h1>📍 Dirección: C. Fray Juan de Moya #170, Santo Domingo, León, Gto.</h1>
     <h1>📅 Fecha: 23 de Agosto 2025 – 13:00 a 20:00 Hrs</h1>
 
     <div class="botones">
-      <!-- HORARIO CORRECTO: 13:00–20:00 local -> 19:00–02:00 UTC -->
       <a class="btn" target="_blank"
          href="https://www.google.com/calendar/render?action=TEMPLATE&text=Grill+and+Pool+Party&dates=20250823T190000Z/20250824T020000Z&details=Grill+and+Pool+Party+en+C.+Fray+Juan+de+Moya+170,+Santo+Domingo,+León&location=C.+Fray+Juan+de+Moya+170,+León">
         📅 Agéndalo en tu calendario
